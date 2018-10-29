@@ -33,7 +33,7 @@ public class PlayerInteractionControls : MonoBehaviour {
                 PlayerManager.instance.playerAttackHandler.Attack();
             }
 
-            if (Input.GetMouseButtonDown(1) && !isRightButtonPressed && PlayerManager.instance.CanAttack()) {
+            if (Input.GetMouseButtonDown(1) && !isRightButtonPressed && PlayerManager.instance.CanAttack() && DungeonManager.instance.dungeonTreasureManager.currentTreasureInDungeon >= PlayerManager.instance.playerAttackHandler.chargedAttackCost) {
                 isRightButtonPressed = true;
                 PlayerManager.instance.playerAttackHandler.StartChargingAttack();
             }

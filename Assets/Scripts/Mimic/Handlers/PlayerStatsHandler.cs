@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using EZCameraShake;
 
 
 [CreateAssetMenu(fileName = "Player Stats",menuName = "Player Handlers/ Player Stat Handler")]
@@ -11,6 +12,7 @@ public class PlayerStatsHandler: ScriptableObject {
     public int maxHealth = 3;
     public int currentHealth;
 
+    public bool isHiding;
     public bool isDead;
 
     public GameObject currentChestPosessed;
@@ -22,6 +24,8 @@ public class PlayerStatsHandler: ScriptableObject {
         currentHealth = maxHealth;
         currentChestType = ChestType.Normal;
         currentChestPosessed = null;
+        isDead = false;
+        isHiding = false;
     }
 
     public void SetChest(GameObject newChest) {
@@ -51,9 +55,10 @@ public class PlayerStatsHandler: ScriptableObject {
 
     public void TakeDamage(int damage) {
 
-        currentHealth -= damage; 
+        currentHealth -= damage;
+        CameraShaker.Instance.ShakeOnce(0.5f, 2f, .1f, 0.5f);
 
-        if(currentHealth <= 0) {
+        if (currentHealth <= 0) {
             currentHealth = 0;
             Die();
         }

@@ -8,7 +8,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6592d13bbbcacfe4983818db3b098910, type: 3}
-  m_Name: Player Animation Handler
+  m_Script: {fileID: 11500000, guid: 55fe1c260e7f0c742bb69eb60c365f88, type: 3}
+  m_Name: Warrior
   m_EditorClassIdentifier: 
-  currentAnimationLength: 0.375
+  maxHealth: 4
+  walkingSpeed: 4
+  chasingSpeed: 6
+  preferredChestType: 0
+  innocenceLevel: 1
+  initialTreasureAmount: 0

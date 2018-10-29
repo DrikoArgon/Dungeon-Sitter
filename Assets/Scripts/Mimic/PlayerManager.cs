@@ -11,6 +11,10 @@ public class PlayerManager : MonoBehaviour {
     public PlayerAttackHandler playerAttackHandler;
     public PlayerChestChangeHandler playerChestChangeHandler;
 
+    [HideInInspector]
+    public PlayerMovement playerMovementHandler;
+
+
     void Awake() {
         if(PlayerManager.instance == null) {
             instance = this;
@@ -19,11 +23,12 @@ public class PlayerManager : MonoBehaviour {
             playerStatsHandler.Initialize();
             playerAttackHandler.Initialize();
             playerChestChangeHandler.Initialize();
+            playerMovementHandler = GetComponent<PlayerMovement>();
         }
     }
 
     public bool CanMove() {
-        if (GameManager.instance.uiActive || playerAttackHandler.isAttacking || playerAttackHandler.isCharging || playerStatsHandler.isDead || playerChestChangeHandler.isTransfering) {
+        if (GameManager.instance.uiActive || playerAttackHandler.isAttacking || playerAttackHandler.isCharging || playerStatsHandler.isDead || playerChestChangeHandler.isTransfering || playerStatsHandler.isHiding) {
             return false;
         } else {
             return true;
@@ -32,7 +37,7 @@ public class PlayerManager : MonoBehaviour {
 
 
     public bool CanAttack() {
-        if (GameManager.instance.uiActive || playerAttackHandler.isAttacking || playerAttackHandler.isCharging || playerStatsHandler.isDead || playerChestChangeHandler.isTransfering) {
+        if (GameManager.instance.uiActive || playerAttackHandler.isAttacking || playerAttackHandler.isCharging || playerStatsHandler.isDead || playerChestChangeHandler.isTransfering || playerStatsHandler.isHiding) {
             return false;
         } else {
             return true;

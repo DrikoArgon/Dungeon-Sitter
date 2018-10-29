@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 [CreateAssetMenu(fileName = "Player Attack Handler", menuName = "Player Handlers/ Player Attack Handler")]
 public class PlayerAttackHandler: ScriptableObject {
@@ -10,6 +11,9 @@ public class PlayerAttackHandler: ScriptableObject {
     public bool isCharging;
 
     public float chargeAttackTime;
+    public int chargedAttackCost = 5;
+
+    public GameObject chargedProjectilePrefab;
 
     private float fullChargeAnimationLength;
     private float chargedAttackAnimationLength;
@@ -67,8 +71,9 @@ public class PlayerAttackHandler: ScriptableObject {
 
         if (isCompletelyCharged) {
 
-            isAttacking = true;
 
+            isAttacking = true;
+            DungeonManager.instance.dungeonTreasureManager.DecreaseAmountOfTreasure(chargedAttackCost);
             PlayerManager.instance.playerAnimationHandler.PlayChargedAttackAnimation();
             PlayerManager.instance.StartCoroutine(ProcessChargedAttack());
 
@@ -128,10 +133,22 @@ public class PlayerAttackHandler: ScriptableObject {
     IEnumerator ProcessChargedAttack() {
 
         float elapsedTime = 0;
+        float animationPercentage = 0;
+        bool hasSpawnedProjectile = false;
 
         while (elapsedTime < chargedAttackAnimationLength) {
 
             elapsedTime += Time.deltaTime;
+            animationPercentage = elapsedTime / chargedAttackAnimationLength;
+
+            if (!hasSpawnedProjectile) {
+                if (animationPercentage > 0.367f) {
+                    CameraShaker.Instance.ShakeOnce(0.5f, 15f, .1f, 0.5f);
+                    Instantiate(chargedProjectilePrefab, PlayerManager.instance.transform.position , Quaternion.identity);
+                    hasSpawnedProjectile = true;
+                }
+            }
+            
 
             yield return null;
         }

@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDamageCollider : MonoBehaviour {
-
-    public int damage = 1;
+public class EnemyAttackRadius : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
+        if (other.tag == "Player") {
 
-        if(other.tag == "Enemy") {
-            
         }
     }
 }

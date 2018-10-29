@@ -13,6 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCompletelyCharged: 0
   isAttacking: 0
+  isCharging: 0
   chargeAttackTime: 1.5
+  chargedAttackCost: 5
+  chargedProjectilePrefab: {fileID: 1721752358316346, guid: 6c239d52a0270e54584d12daa081cea6,
+    type: 2}
   normalAttack: {fileID: 11400000, guid: 5e563920efd545d4996212732d92f98c, type: 2}
   currentAttack: {fileID: 11400000, guid: 5e563920efd545d4996212732d92f98c, type: 2}

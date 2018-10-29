@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerDirection {
+    Up,
+    Down,
+    Left,
+    Right
+}
+
 public class PlayerMovement : MonoBehaviour {
 
     public float speed;
@@ -214,9 +221,4 @@ public class PlayerMovement : MonoBehaviour {
     }
 }
 
-public enum PlayerDirection {
-    Up,
-    Down,
-    Left,
-    Right
-}
+
