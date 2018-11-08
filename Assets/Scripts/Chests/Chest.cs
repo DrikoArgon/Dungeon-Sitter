@@ -5,6 +5,7 @@ using UnityEngine;
 public class Chest : MonoBehaviour {
 
     public ChestType chestType;
+    public Transform arrivalPoint;
     public int treasureAmount;
 
 	// Use this for initialization

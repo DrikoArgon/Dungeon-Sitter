@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySenseCollider : MonoBehaviour {
+public class EnemySenseRadius : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player") {

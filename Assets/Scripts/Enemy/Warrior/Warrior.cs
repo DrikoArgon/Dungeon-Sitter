@@ -7,9 +7,9 @@ public class Warrior : Enemy {
     public EnemyStateMachine<Warrior> stateMachine { get; set; }
 
     void Start() {
-
+        
         stateMachine = new EnemyStateMachine<Warrior>(this);
-        stateMachine.SetState(new WarriorCheckingChestState());
+        stateMachine.SetState(new WarriorWanderState());
     }
 
     void Update() {

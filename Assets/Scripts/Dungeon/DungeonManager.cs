@@ -9,7 +9,7 @@ public class DungeonManager : MonoBehaviour {
     public DungeonTreasureManager dungeonTreasureManager;
 
     void Awake() {
-        if (PlayerManager.instance == null) {
+        if (DungeonManager.instance == null) {
             instance = this;
 
             dungeonTreasureManager.Initialize();
@@ -22,8 +22,4 @@ public class DungeonManager : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

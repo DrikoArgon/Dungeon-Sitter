@@ -46,11 +46,7 @@ public class PlayerChestChangeHandler : ScriptableObject {
 
     IEnumerator GoToNewChestLocation() {
 
-        Debug.Log("Target Chest is: " + targetChest.name);
-
         Vector2 targetLocation = targetChest.transform.position;
-
-        Debug.Log("Target Location: " + targetLocation);
 
         isTransfering = true;
         float elapsedTime = 0;

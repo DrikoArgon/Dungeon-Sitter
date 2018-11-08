@@ -15,6 +15,30 @@ public class EnemyAnimationHandler : MonoBehaviour {
 
     }
 
+    public void PlayAnimation(string animationName) {
+        enemyAnimator.Play(animationName);
+    }
+
+    public void PlayHurtAnimation() {
+        enemyAnimator.Play("Hurt", -1, 0);
+    }
+
+    public void PlayWalkingAnimation(Vector2 direction) {
+
+        enemyAnimator.SetFloat("FaceX", direction.x);
+        enemyAnimator.SetFloat("FaceY", direction.y);
+
+        enemyAnimator.Play("Walk");
+    }
+
+    public void PlayRunningAnimation(Vector2 direction) {
+
+        enemyAnimator.SetFloat("FaceX", direction.x);
+        enemyAnimator.SetFloat("FaceY", direction.y);
+
+        enemyAnimator.Play("Run");
+    }
+
     void SetAnimationLengths() {
 
         AnimationClip[] clips = enemyAnimator.runtimeAnimatorController.animationClips;
