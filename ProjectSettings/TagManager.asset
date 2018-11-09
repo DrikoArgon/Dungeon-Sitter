@@ -43,11 +43,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Behind
+  - name: Floor
+    uniqueID: 3782843071
+    locked: 0
+  - name: Wall
+    uniqueID: 159598331
+    locked: 0
+  - name: Behind Player
     uniqueID: 1238126001
     locked: 0
   - name: Middle
     uniqueID: 2412821079
+    locked: 0
+  - name: Top Wall
+    uniqueID: 3130802303
     locked: 0
   - name: UI
     uniqueID: 583257287
