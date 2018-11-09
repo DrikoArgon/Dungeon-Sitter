@@ -14,6 +14,12 @@ public class PlayerManager : MonoBehaviour {
     [HideInInspector]
     public PlayerMovement playerMovementHandler;
 
+    public Transform playerArrivalPointUp;
+    public Transform playerArrivalPointDown;
+    public Transform playerArrivalPointLeft;
+    public Transform playerArrivalPointRight;
+
+    public int convincingLevel;
 
     void Awake() {
         if(PlayerManager.instance == null) {
@@ -24,7 +30,22 @@ public class PlayerManager : MonoBehaviour {
             playerAttackHandler.Initialize();
             playerChestChangeHandler.Initialize();
             playerMovementHandler = GetComponent<PlayerMovement>();
+            convincingLevel = 0;
         }
+    }
+
+    public Transform GetPlayerArrivalPoint() {
+
+        if(playerMovementHandler.playerDirection == PlayerDirection.Up) {
+            return playerArrivalPointUp;
+        }else if (playerMovementHandler.playerDirection == PlayerDirection.Down) {
+            return playerArrivalPointDown;
+        } else if (playerMovementHandler.playerDirection == PlayerDirection.Left) {
+            return playerArrivalPointLeft;
+        } else {
+            return playerArrivalPointRight;
+        }
+
     }
 
     public bool CanMove() {

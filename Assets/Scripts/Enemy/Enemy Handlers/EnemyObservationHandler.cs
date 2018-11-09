@@ -6,7 +6,9 @@ public class EnemyObservationHandler : MonoBehaviour {
 
     public Room targetRoom;
 
-    public GameObject targetChest;
+    public TargetChestInfo targetChestInfo;
+
+    public bool isWaitingForChestToOpen;
 
     private Enemy enemy;
 
@@ -21,7 +23,7 @@ public class EnemyObservationHandler : MonoBehaviour {
 	
 	public void DefineTargetRoom() {
 
-        List<Room> possibleRooms = targetRoom.GetOpenRooms(targetRoom);
+        List<Room> possibleRooms = targetRoom.GetOpenRooms();
 
         int randomInt = Random.Range(0, possibleRooms.Count);
 
@@ -31,7 +33,8 @@ public class EnemyObservationHandler : MonoBehaviour {
 
     public bool DefineTargetChest() {
 
-        List<GameObject> chestsInRoom = targetRoom.chests;
+        List<GameObject> chestsInRoom = targetRoom.GetActiveChests();
+        PlayerDirection direction;
 
         if(chestsInRoom.Count == 0) {
             return false;
@@ -39,9 +42,25 @@ public class EnemyObservationHandler : MonoBehaviour {
 
         int randomInt = Random.Range(0, chestsInRoom.Count);
 
-        targetChest = chestsInRoom[randomInt];
+        if (chestsInRoom[randomInt].tag == "Chest") {
+            direction = chestsInRoom[randomInt].GetComponent<Chest>().chestDirection;
+        } else {
+            direction = chestsInRoom[randomInt].GetComponent<PlayerMovement>().playerDirection;
+        }
 
-        Debug.Log("Target chest name: " + targetChest);
+        targetChestInfo = new TargetChestInfo(chestsInRoom[randomInt], direction);
+
         return true;
+    }
+}
+
+[System.Serializable]
+public struct TargetChestInfo {
+    public GameObject targetChest;
+    public PlayerDirection chestDirection;
+
+    public TargetChestInfo(GameObject _targetChest, PlayerDirection _chestDirection) {
+        targetChest = _targetChest;
+        chestDirection = _chestDirection;
     }
 }

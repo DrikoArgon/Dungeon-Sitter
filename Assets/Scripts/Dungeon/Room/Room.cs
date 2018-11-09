@@ -7,19 +7,24 @@ public class Room : MonoBehaviour {
 
     public List<RoomInfo> conectedRooms;
     public List<GameObject> chests;
+    public Transform roomArrivalPoint;
 
 	// Use this for initialization
 	void Start () {
 		
 	}
+
+    public void AddPlayerToList() {
+
+    }
 	
-    public List<Room> GetOpenRooms(Room lastRoom) {
+    public List<Room> GetOpenRooms() {
 
         List<Room> openRooms = new List<Room>();
 
         for (int i = 0; i < conectedRooms.Count; i++) {
             if(conectedRooms.Count > 1) {
-                if (!conectedRooms[i].isNotAccessible && conectedRooms[i].room.gameObject.GetInstanceID() != lastRoom.gameObject.GetInstanceID()) {
+                if (!conectedRooms[i].isNotAccessible && conectedRooms[i].room.gameObject.GetInstanceID() != gameObject.GetInstanceID()) {
                     openRooms.Add(conectedRooms[i].room);
                 }
             } else {
@@ -31,6 +36,26 @@ public class Room : MonoBehaviour {
         }
 
         return openRooms;
+    }
+
+    public List<GameObject> GetActiveChests() {
+
+        List<GameObject> activeChests = new List<GameObject>();
+
+        for (int i = 0; i < chests.Count; i++) {
+           
+            if(chests[i].tag == "Chest") {
+                if (!chests[i].GetComponent<Chest>().isDisabled) {
+                    activeChests.Add(chests[i]);
+                }
+            } else {
+                activeChests.Add(chests[i]);
+            } 
+
+        }
+
+        return activeChests;
+
     }
 
 }
