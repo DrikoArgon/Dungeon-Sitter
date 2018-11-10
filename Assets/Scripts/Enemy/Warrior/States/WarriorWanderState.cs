@@ -8,7 +8,7 @@ public class WarriorWanderState : EnemyState<Warrior> {
 
         // walk to location
         if(owner.movementHandler.currentTarget != null) {
-            owner.movementHandler.WanderToTarget();
+            owner.movementHandler.ProcessMovement(false);
         }
         
         //If location is reached, go to checking state to check for chests
@@ -29,6 +29,7 @@ public class WarriorWanderState : EnemyState<Warrior> {
 
     public override void OnStateEnter(Warrior owner) {
         owner.movementHandler.StartWandering();
+        owner.movementHandler.DefineTarget(owner.movementHandler.currentTarget);
         
     }
 

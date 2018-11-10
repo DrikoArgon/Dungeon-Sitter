@@ -10,41 +10,36 @@ public class WarriorCheckingChestState : EnemyState<Warrior> {
         //Do some kind of animation or icon on the enemys head to show that he spotted a chest!
         //After the animation is over, move the enemy to the chest 
 
-        if (!isReturningToRoomArrivalPoint) {
 
-            owner.movementHandler.WalkToSelectedChest(owner.observationHandler.targetChestInfo.chestDirection);
+        owner.movementHandler.ProcessMovement(false);
 
-            if (owner.movementHandler.targetReached) {
-                //Start checking the chest. 
+        if (owner.movementHandler.targetReached) {
+            //Start checking the chest. 
 
-                if (owner.observationHandler.targetChestInfo.targetChest.tag == "Chest") {
+            if (owner.observationHandler.targetChestInfo.targetChest.tag == "Chest") {
 
-                    //Look at the chest
-                    owner.movementHandler.LookAtChest(owner.observationHandler.targetChestInfo.chestDirection);
-                    //Open the chest
-                    owner.observationHandler.isWaitingForChestToOpen = true;
-                    owner.observationHandler.targetChestInfo.targetChest.GetComponent<Chest>().OpenChest(owner);
+                //Look at the chest
+                owner.movementHandler.LookAtChest(owner.observationHandler.targetChestInfo.chestDirection);
+                //Open the chest
+                owner.observationHandler.isWaitingForChestToOpen = true;
+                owner.observationHandler.targetChestInfo.targetChest.GetComponent<Chest>().OpenChest(owner);
 
-                    if (!owner.observationHandler.isWaitingForChestToOpen) {
+                if (!owner.observationHandler.isWaitingForChestToOpen) {
 
-                        owner.statsHandler.currentTreasureAmount += owner.observationHandler.targetChestInfo.targetChest.GetComponent<Chest>().treasureAmount;
-                        RestartSearch(owner);
-
-                    }
-
-                } else {
-
-                    //Faz as coisinhas de disconfiança tudo pq eh o mimico
+                    owner.statsHandler.currentTreasureAmount += owner.observationHandler.targetChestInfo.targetChest.GetComponent<Chest>().treasureAmount;
+                    RestartSearch(owner);
 
                 }
 
+            } else {
+
+                //Faz as coisinhas de disconfiança tudo pq eh o mimico
+
             }
 
-        } else {
-
-            owner.movementHandler.WanderToTarget();
-
         }
+
+
     }
 
     public override void OnStateEnter(Warrior owner) {
@@ -54,7 +49,7 @@ public class WarriorCheckingChestState : EnemyState<Warrior> {
 
             Debug.Log("No chests in this room. Going to next room");
             owner.observationHandler.DefineTargetRoom();
-            owner.movementHandler.DefineTarget(owner.observationHandler.targetRoom.roomArrivalPoint);
+            owner.movementHandler.DefineTarget(owner.observationHandler.targetRoom.GetArrivalPoint());
 
             owner.stateMachine.SetState(new WarriorWanderState());
         } else {
@@ -69,7 +64,7 @@ public class WarriorCheckingChestState : EnemyState<Warrior> {
                 Transform target = owner.observationHandler.targetChestInfo.targetChest.GetComponent<PlayerManager>().GetPlayerArrivalPoint();
                 owner.movementHandler.DefineTarget(target);
             }
-            
+
         }
     }
 
@@ -77,27 +72,7 @@ public class WarriorCheckingChestState : EnemyState<Warrior> {
 
         Debug.Log("Searching again");
 
-        if (!owner.observationHandler.DefineTargetChest()) {
-
-            Debug.Log("No chests in this room. Return to center.");
-            owner.movementHandler.DefineTarget(owner.observationHandler.targetRoom.roomArrivalPoint);
-            isReturningToRoomArrivalPoint = true;
-
-        } else {
-
-            Debug.Log("There are chests here!");
-            owner.observationHandler.DefineTargetChest();
-
-            //Check if it's a normal chest or the enemy to grab the correct target position to walk to
-            if (owner.observationHandler.targetChestInfo.targetChest.tag == "Chest") {
-                owner.movementHandler.DefineTarget(owner.observationHandler.targetChestInfo.targetChest.GetComponent<Chest>().arrivalPoint);
-            } else {
-
-                Transform target = owner.observationHandler.targetChestInfo.targetChest.GetComponent<PlayerManager>().GetPlayerArrivalPoint();
-                owner.movementHandler.DefineTarget(target);
-            }
-
-        }
+        OnStateEnter(owner);
     }
 
     public override void OnStateExit(Warrior owner) {

@@ -17,6 +17,15 @@ public class Room : MonoBehaviour {
     public void AddPlayerToList() {
 
     }
+
+    public Transform GetArrivalPoint() {
+
+        if(roomArrivalPoint != null) {
+            return roomArrivalPoint;
+        } else {
+            return transform;
+        }
+    }
 	
     public List<Room> GetOpenRooms() {
 
