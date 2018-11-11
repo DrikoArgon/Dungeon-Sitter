@@ -5,6 +5,7 @@ using UnityEngine;
 public class WarriorCheckingChestState : EnemyState<Warrior> {
 
     private bool isReturningToRoomArrivalPoint;
+    private bool alreadyOpenedChest;
 
     public override void OnStateUpdate(Warrior owner) {
         //Do some kind of animation or icon on the enemys head to show that he spotted a chest!
@@ -20,13 +21,18 @@ public class WarriorCheckingChestState : EnemyState<Warrior> {
 
                 //Look at the chest
                 owner.movementHandler.LookAtChest(owner.observationHandler.targetChestInfo.chestDirection);
+
                 //Open the chest
-                owner.observationHandler.isWaitingForChestToOpen = true;
-                owner.observationHandler.targetChestInfo.targetChest.GetComponent<Chest>().OpenChest(owner);
+                if (!alreadyOpenedChest) {
+                    owner.observationHandler.isWaitingForChestToOpen = true;
+                    owner.observationHandler.targetChestInfo.targetChest.GetComponent<Chest>().OpenChest(owner);
+                    alreadyOpenedChest = true;
+                }
+
 
                 if (!owner.observationHandler.isWaitingForChestToOpen) {
 
-                    owner.statsHandler.currentTreasureAmount += owner.observationHandler.targetChestInfo.targetChest.GetComponent<Chest>().treasureAmount;
+                    owner.statsHandler.IncreaseCurrentTreasure(owner.observationHandler.targetChestInfo.targetChest.GetComponent<Chest>().treasureAmount);
                     RestartSearch(owner);
 
                 }
@@ -43,6 +49,7 @@ public class WarriorCheckingChestState : EnemyState<Warrior> {
     }
 
     public override void OnStateEnter(Warrior owner) {
+        alreadyOpenedChest = false;
         Debug.Log("Entered Checking State");
 
         if (!owner.observationHandler.DefineTargetChest()) {

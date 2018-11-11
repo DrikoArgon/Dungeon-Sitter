@@ -44,11 +44,13 @@ public class EnemyObservationHandler : MonoBehaviour {
 
         if (chestsInRoom[randomInt].tag == "Chest") {
             direction = chestsInRoom[randomInt].GetComponent<Chest>().chestDirection;
+            chestsInRoom[randomInt].GetComponent<Chest>().isTargeted = true;
         } else {
             direction = chestsInRoom[randomInt].GetComponent<PlayerMovement>().playerDirection;
         }
 
         targetChestInfo = new TargetChestInfo(chestsInRoom[randomInt], direction);
+        
 
         return true;
     }

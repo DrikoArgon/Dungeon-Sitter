@@ -22,8 +22,9 @@ public class PlayerChestSenseCollider : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
 
         if (other.tag == "Chest") {
-
-            chestsInsideRadius.Add(other.gameObject);
+            if(!other.GetComponent<Chest>().isTargeted && !other.GetComponent<Chest>().isDisabled) {
+                chestsInsideRadius.Add(other.gameObject);
+            }
         }
     }
 

@@ -14,6 +14,7 @@ public class Chest : MonoBehaviour {
     private Animator chestAnimator;
     private Dictionary<string, float> animationLengths;
 
+    public bool isTargeted;
     public bool isDisabled;
 
     private void Awake() {
@@ -64,6 +65,7 @@ public class Chest : MonoBehaviour {
             yield return null;
         }
 
+        DungeonManager.instance.dungeonTreasureManager.DecreaseAmountOfTreasure(treasureAmount);
         currentEnemyInteracting.GetComponent<EnemyObservationHandler>().isWaitingForChestToOpen = false;
     }
 }

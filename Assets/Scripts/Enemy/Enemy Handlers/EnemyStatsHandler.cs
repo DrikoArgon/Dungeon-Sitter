@@ -23,6 +23,10 @@ public class EnemyStatsHandler : MonoBehaviour {
 
 	}
 
+    public void IncreaseCurrentTreasure(int amount) {
+        currentTreasureAmount += amount;
+    }
+
     public void ReceiveDamage(int damage) {
 
         isHurt = true;

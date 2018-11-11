@@ -30,9 +30,15 @@ public class PlayerChestChangeHandler : ScriptableObject {
 
         if(senseCollider.chestsInsideRadius.Count > 0) {
 
-            playerTransform.GetComponent<Collider2D>().isTrigger = true;
-            targetChest = senseCollider.chestsInsideRadius[0];
-            PlayerManager.instance.StartCoroutine(GoToNewChestLocation());
+            if(senseCollider.chestsInsideRadius[0].GetComponent<Chest>().isTargeted || senseCollider.chestsInsideRadius[0].GetComponent<Chest>().isDisabled) {
+                senseCollider.chestsInsideRadius.RemoveAt(0);
+                TransferToChest();
+            } else {
+                playerTransform.GetComponent<Collider2D>().isTrigger = true;
+                targetChest = senseCollider.chestsInsideRadius[0];
+                PlayerManager.instance.StartCoroutine(GoToNewChestLocation());
+            }
+
         }
 
     }
