@@ -16,4 +16,4 @@ MonoBehaviour:
   chasingSpeed: 3
   preferredChestType: 0
   innocenceLevel: 1
-  initialTreasureAmount: 0
+  initialTreasureAmount: 2

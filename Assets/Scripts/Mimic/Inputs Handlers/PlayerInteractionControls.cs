@@ -42,6 +42,15 @@ public class PlayerInteractionControls : MonoBehaviour {
                 PlayerManager.instance.playerChestChangeHandler.TransferToChest();
             }
 
+            if (Input.GetKeyDown(KeyCode.Space)) {
+
+                if (!PlayerManager.instance.playerStatsHandler.isHiding) {
+                    PlayerManager.instance.HidePlayer(true);
+                } else {
+                    PlayerManager.instance.HidePlayer(false);
+                }
+
+            }
 
         } else {
 

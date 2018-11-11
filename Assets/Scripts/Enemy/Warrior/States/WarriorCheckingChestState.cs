@@ -29,7 +29,6 @@ public class WarriorCheckingChestState : EnemyState<Warrior> {
                     alreadyOpenedChest = true;
                 }
 
-
                 if (!owner.observationHandler.isWaitingForChestToOpen) {
 
                     owner.statsHandler.IncreaseCurrentTreasure(owner.observationHandler.targetChestInfo.targetChest.GetComponent<Chest>().treasureAmount);
@@ -39,13 +38,24 @@ public class WarriorCheckingChestState : EnemyState<Warrior> {
 
             } else {
 
-                //Faz as coisinhas de disconfiança tudo pq eh o mimico
+                //Faz as coisinhas de desconfiança tudo pq eh o mimico
+                owner.movementHandler.LookAtChest(owner.observationHandler.targetChestInfo.targetChest.GetComponent<PlayerMovement>().playerDirection);
 
+                //Open the chest
+                if (!alreadyOpenedChest) {
+                    owner.observationHandler.isWaitingForChestToOpen = true;
+                    owner.observationHandler.targetChestInfo.targetChest.GetComponent<PlayerManager>().OpenChest(owner);
+                    alreadyOpenedChest = true;
+                }
+
+                if (!owner.observationHandler.isWaitingForChestToOpen) {
+
+                    //Play surprised animation
+
+
+                }
             }
-
         }
-
-
     }
 
     public override void OnStateEnter(Warrior owner) {

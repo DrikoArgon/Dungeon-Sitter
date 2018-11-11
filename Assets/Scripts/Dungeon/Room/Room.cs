@@ -14,8 +14,12 @@ public class Room : MonoBehaviour {
 		
 	}
 
-    public void AddPlayerToList() {
+    public void AddPlayerToList(GameObject player) {
+        chests.Add(player);
+    }
 
+    public void RemovePlayerFromList() {
+        chests.RemoveAt(chests.Count - 1);
     }
 
     public Transform GetArrivalPoint() {

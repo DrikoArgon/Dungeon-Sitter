@@ -43,5 +43,11 @@ public class EnemyStatsHandler : MonoBehaviour {
 
     }
 
+    public void Execute() {
+
+        //Show the UI this enemy died
+        Destroy(gameObject);
+    }
+
 	
 }

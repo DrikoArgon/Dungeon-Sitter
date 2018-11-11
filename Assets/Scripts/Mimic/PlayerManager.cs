@@ -19,6 +19,10 @@ public class PlayerManager : MonoBehaviour {
     public Transform playerArrivalPointLeft;
     public Transform playerArrivalPointRight;
 
+    public Room currentRoom;
+
+    public Enemy enemyOpeningChest;
+
     public int convincingLevel;
 
     void Awake() {
@@ -64,4 +68,66 @@ public class PlayerManager : MonoBehaviour {
             return true;
         }
     }
+
+    public void OpenChest(Enemy _enemyOpeningChest) {
+        enemyOpeningChest = _enemyOpeningChest;
+
+        StartCoroutine(ProcessOpenChest());
+
+    }
+
+    public void HidePlayer(bool _isHiding) {
+
+        playerStatsHandler.isHiding = _isHiding;
+        playerAnimationHandler.PlayAnimation("Hide");
+
+        if(currentRoom != null) {
+            if (_isHiding) {
+                GetComponent<Rigidbody2D>().isKinematic = true;
+                currentRoom.AddPlayerToList(this.gameObject);
+            } else {
+                GetComponent<Rigidbody2D>().isKinematic = false;
+                currentRoom.RemovePlayerFromList();
+            }
+        }
+
+    }
+
+    public void EatEnemy() {
+        DungeonManager.instance.dungeonTreasureManager.IncreaseAmountOfTreasure(enemyOpeningChest.statsHandler.currentTreasureAmount);
+        enemyOpeningChest.statsHandler.Execute();
+    }
+
+    public void SpawnEatenEnemyObject() {
+        //Spawn the item that flyes when you eat the enemy
+        
+    }
+
+    IEnumerator ProcessOpenChest() {
+
+        float elapsedTime = 0;
+        float openChestAnimationLength = playerAnimationHandler.GetAnimationLength("TrueOpen");
+        float executeAnimationLength = playerAnimationHandler.GetAnimationLength("Execute");
+
+        playerAnimationHandler.PlayAnimation("TrueOpen");
+
+        while (elapsedTime < openChestAnimationLength) {
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        enemyOpeningChest.GetComponent<EnemyObservationHandler>().isWaitingForChestToOpen = false;
+
+        elapsedTime = 0;
+        playerAnimationHandler.PlayAnimation("Execute");
+
+        while (elapsedTime < executeAnimationLength) {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        playerAnimationHandler.PlayAnimation("Hide");
+    }
+
 }
