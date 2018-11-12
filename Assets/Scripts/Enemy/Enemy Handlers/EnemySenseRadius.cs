@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class EnemySenseRadius : MonoBehaviour {
 
-	void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Player") {
+    Enemy enemy;
+    EnemyStatsHandler enemyStatsHandler;
+    EnemyBattleHandler enemyBattleHandler;
 
+    private void Start() {
+        enemy = GetComponentInParent<Enemy>();
+    }
+
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if(other.tag == "Player") {
+            if (!PlayerManager.instance.playerStatsHandler.isHiding) {
+                enemy.battleHandler.target = other.gameObject;
+                enemy.statsHandler.isPlayerSensed = true;
+            } 
         }
     }
 }

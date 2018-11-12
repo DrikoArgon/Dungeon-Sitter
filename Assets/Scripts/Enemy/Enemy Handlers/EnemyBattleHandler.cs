@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyBattleHandler : MonoBehaviour {
 
     private Enemy enemy;
+
+    public GameObject target;
     // Use this for initialization
     void Start () {
 
@@ -12,4 +14,10 @@ public class EnemyBattleHandler : MonoBehaviour {
     }
 	
 
+    public void Attack() {
+
+
+
+
+    }
 }

@@ -5480,7 +5480,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 422408270}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.018999403, y: 0.00000035762787, z: -5.4}
+  m_LocalPosition: {x: 2.4799995, y: 0.00000035762787, z: -5.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 282350861}
@@ -7176,7 +7176,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.018999403, y: 0.00000035762787, z: 194.6}
+  m_LocalPosition: {x: 2.4799995, y: 0.00000035762787, z: 194.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1904431962}
@@ -17220,7 +17220,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1427923635}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.019, y: 0, z: 0}
+  m_LocalPosition: {x: 2.48, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 414510589}
@@ -29925,6 +29925,7 @@ MonoBehaviour:
   currentTreasureAmount: 0
   currentHealth: 0
   isPlayerSensed: 0
+  isPlayerOnAttackRadius: 0
   isAttacking: 0
   isHurt: 0
   isDead: 0
@@ -29939,6 +29940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30c21a6744eaf64ca2d21b857c3999b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!114 &1930398493
 MonoBehaviour:
   m_ObjectHideFlags: 0

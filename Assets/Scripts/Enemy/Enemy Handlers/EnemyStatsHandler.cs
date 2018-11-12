@@ -8,6 +8,7 @@ public class EnemyStatsHandler : MonoBehaviour {
     public int currentHealth;
 
     public bool isPlayerSensed;
+    public bool isPlayerOnAttackRadius;
     public bool isAttacking;
     public bool isHurt;
     public bool isDead;

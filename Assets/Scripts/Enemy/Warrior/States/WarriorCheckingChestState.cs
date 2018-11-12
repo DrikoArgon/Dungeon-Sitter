@@ -60,17 +60,15 @@ public class WarriorCheckingChestState : EnemyState<Warrior> {
 
     public override void OnStateEnter(Warrior owner) {
         alreadyOpenedChest = false;
-        Debug.Log("Entered Checking State");
 
         if (!owner.observationHandler.DefineTargetChest()) {
 
-            Debug.Log("No chests in this room. Going to next room");
             owner.observationHandler.DefineTargetRoom();
             owner.movementHandler.DefineTarget(owner.observationHandler.targetRoom.GetArrivalPoint());
 
             owner.stateMachine.SetState(new WarriorWanderState());
         } else {
-            Debug.Log("There are chests here!");
+
             owner.observationHandler.DefineTargetChest();
 
             //Check if it's a normal chest or the enemy to grab the correct target position to walk to
@@ -86,8 +84,6 @@ public class WarriorCheckingChestState : EnemyState<Warrior> {
     }
 
     void RestartSearch(Warrior owner) {
-
-        Debug.Log("Searching again");
 
         OnStateEnter(owner);
     }

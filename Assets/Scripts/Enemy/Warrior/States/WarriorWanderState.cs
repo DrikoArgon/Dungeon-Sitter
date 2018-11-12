@@ -18,7 +18,7 @@ public class WarriorWanderState : EnemyState<Warrior> {
 
         //If player sensed go to chase
         if (owner.statsHandler.isPlayerSensed) {
-
+            owner.stateMachine.SetState(new WarriorChasingState());
         }
 
         //if hurt go to hurt
