@@ -59,6 +59,9 @@ TagManager:
   - name: Top Wall
     uniqueID: 3130802303
     locked: 0
+  - name: Dark Tiles
+    uniqueID: 984831609
+    locked: 0
   - name: UI
     uniqueID: 583257287
     locked: 0
