@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-
+        StartWaves();
         currentTime = 0;
     }
 
@@ -57,21 +57,29 @@ public class EnemySpawner : MonoBehaviour {
             if (currentTimeBetweenEnemies >= currentWaveTimeBetweenEnemies) {
 
                 currentTimeBetweenEnemies = 0;
+                SpawnEnemy();
+
                 currentEnemyIndex++;
 
                 if (currentEnemyIndex >= currentWave.waveEnemies.Count) {
                     isWaitingNextWave = true;
-                } else {
-                    SpawnEnemy();
-                }
+                } 
 
             }
         }
 
-        if (currentTime >= wavesData.timeBetweenWaves) {
-            SetNextWave();
+        if(wavesData.dungeonWaves.Count > 1 && isWaitingNextWave) {
+            if (currentTime >= wavesData.timeBetweenWaves) {
+                SetNextWave();
+            }
         }
 
+
+    }
+
+    public void StartWaves() {
+        currentWave = wavesData.dungeonWaves[0];
+        currentWaveTimeBetweenEnemies = currentWave.timeBetweenEachEnemy;
     }
 
     public void SetNextWave() {
@@ -94,10 +102,10 @@ public class EnemySpawner : MonoBehaviour {
 
         Room entrance = dungeonEntrances[randomIndex];
 
-        GameObject newEnemy = (GameObject)Instantiate(Resources.Load("Enemy Prefabs/" + currentWave.waveEnemies[currentEnemyIndex].ToString()), entrance.entranceEnemySpawnPoint.position, Quaternion.identity);
+        GameObject newEnemy = (GameObject)Instantiate(Resources.Load("Prefabs/Enemies/" + currentWave.waveEnemies[currentEnemyIndex].ToString()), entrance.entranceEnemySpawnPoint.position, Quaternion.identity);
 
         newEnemy.GetComponentInChildren<EnemyMovementHandler>().DefineTarget(entrance.GetArrivalPoint());
-                
+        newEnemy.GetComponentInChildren<EnemyObservationHandler>().targetRoom = entrance;         
 
     }
 

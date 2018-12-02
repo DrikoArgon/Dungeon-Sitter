@@ -42,8 +42,9 @@ public class EnemyMovementHandler : MonoBehaviour {
     public void DefineTarget(Transform target) {
         currentTarget = target;
         targetReached = false;
-        navmeshAgent.SetDestination(target.position);
+        navmeshAgent.SetDestination(new Vector3(target.position.x, target.position.y, 0));
     }
+
 
     public void ProcessMovement(bool isRunning) {
 
