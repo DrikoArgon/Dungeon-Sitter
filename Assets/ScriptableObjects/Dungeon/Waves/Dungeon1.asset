@@ -13,13 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenWaves: 0
   dungeonWaves:
-  - waveEnemies: 
-    timeBetweenEachEnemy: 0
-  - waveEnemies: 
-    timeBetweenEachEnemy: 0
-  - waveEnemies: 
-    timeBetweenEachEnemy: 0
-  - waveEnemies: 
-    timeBetweenEachEnemy: 0
-  - waveEnemies: 
-    timeBetweenEachEnemy: 0
+  - waveEnemies: 0000000000000000000000000000000000000000
+    timeBetweenEachEnemy: 60

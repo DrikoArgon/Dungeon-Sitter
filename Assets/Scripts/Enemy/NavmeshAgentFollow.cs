@@ -13,6 +13,6 @@ public class NavmeshAgentFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = navmeshAgentObject.transform.position;
+        transform.position = new Vector3(navmeshAgentObject.transform.position.x, navmeshAgentObject.transform.position.y, transform.position.z);
 	}
 }
