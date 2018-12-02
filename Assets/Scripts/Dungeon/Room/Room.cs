@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Room : MonoBehaviour {
 
+    public bool isCorridor;
+    public bool isEntrance;
+
+    public Transform entranceEnemySpawnPoint;
 
     public List<RoomInfo> conectedRooms;
     public List<GameObject> chests;
@@ -15,11 +19,15 @@ public class Room : MonoBehaviour {
 	}
 
     public void AddPlayerToList(GameObject player) {
-        chests.Add(player);
+        if(!isCorridor || !isEntrance) {
+            chests.Add(player);
+        }
     }
 
     public void RemovePlayerFromList() {
-        chests.RemoveAt(chests.Count - 1);
+        if (!isCorridor || !isEntrance) {
+            chests.RemoveAt(chests.Count - 1);
+        }
     }
 
     public Transform GetArrivalPoint() {

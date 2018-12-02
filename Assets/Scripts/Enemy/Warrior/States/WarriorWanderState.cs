@@ -29,8 +29,11 @@ public class WarriorWanderState : EnemyState<Warrior> {
 
     public override void OnStateEnter(Warrior owner) {
         owner.movementHandler.StartWandering();
-        owner.movementHandler.DefineTarget(owner.movementHandler.currentTarget);
-        
+
+        if(owner.movementHandler.currentTarget != null) {
+            owner.movementHandler.DefineTarget(owner.movementHandler.currentTarget);
+        }
+    
     }
 
     public override void OnStateExit(Warrior owner) {

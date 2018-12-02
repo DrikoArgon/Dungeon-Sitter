@@ -78,7 +78,12 @@ public class PlayerManager : MonoBehaviour {
 
     public void HidePlayer(bool _isHiding) {
 
-        playerStatsHandler.isHiding = _isHiding;
+        if(!currentRoom.isCorridor || !currentRoom.isEntrance) {
+            playerStatsHandler.isHiding = false;
+        } else {
+            playerStatsHandler.isHiding = _isHiding;
+        }
+
         playerAnimationHandler.PlayAnimation("Hide");
 
         if(currentRoom != null) {
