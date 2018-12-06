@@ -71,9 +71,8 @@ public class PlayerAttackHandler: ScriptableObject {
 
         if (isCompletelyCharged) {
 
-
             isAttacking = true;
-            DungeonManager.instance.dungeonTreasureManager.DecreaseAmountOfTreasure(chargedAttackCost);
+            //DungeonManager.instance.dungeonTreasureManager.DecreaseAmountOfTreasure(chargedAttackCost);
             PlayerManager.instance.playerAnimationHandler.PlayChargedAttackAnimation();
             PlayerManager.instance.StartCoroutine(ProcessChargedAttack());
 
@@ -143,7 +142,8 @@ public class PlayerAttackHandler: ScriptableObject {
 
             if (!hasSpawnedProjectile) {
                 if (animationPercentage > 0.367f) {
-                    CameraShaker.Instance.ShakeOnce(0.5f, 15f, .1f, 0.5f);
+
+                    PlayerManager.instance.ShakeCamera(2f, 2f, 0.2f);
                     Instantiate(chargedProjectilePrefab, PlayerManager.instance.transform.position , Quaternion.identity);
                     hasSpawnedProjectile = true;
                 }

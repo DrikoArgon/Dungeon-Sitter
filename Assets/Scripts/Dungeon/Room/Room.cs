@@ -19,13 +19,13 @@ public class Room : MonoBehaviour {
 	}
 
     public void AddPlayerToList(GameObject player) {
-        if(!isCorridor || !isEntrance) {
+        if(!isCorridor && !isEntrance) {
             chests.Add(player);
         }
     }
 
     public void RemovePlayerFromList() {
-        if (!isCorridor || !isEntrance) {
+        if (!isCorridor && !isEntrance) {
             chests.RemoveAt(chests.Count - 1);
         }
     }

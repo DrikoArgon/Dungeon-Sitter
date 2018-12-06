@@ -55,6 +55,11 @@ public class WarriorCheckingChestState : EnemyState<Warrior> {
 
                 }
             }
+        } else {
+
+            if (owner.statsHandler.isPlayerSensed) {
+                owner.stateMachine.SetState(new WarriorChasingState());
+            }
         }
     }
 

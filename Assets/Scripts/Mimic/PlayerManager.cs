@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,6 +26,8 @@ public class PlayerManager : MonoBehaviour {
 
     public int convincingLevel;
 
+    public CinemachineImpulseSource impulseSource;
+
     void Awake() {
         if(PlayerManager.instance == null) {
             instance = this;
@@ -34,7 +37,9 @@ public class PlayerManager : MonoBehaviour {
             playerAttackHandler.Initialize();
             playerChestChangeHandler.Initialize();
             playerMovementHandler = GetComponent<PlayerMovement>();
+            impulseSource = GetComponent<CinemachineImpulseSource>();
             convincingLevel = 0;
+            
         }
     }
 
@@ -78,7 +83,7 @@ public class PlayerManager : MonoBehaviour {
 
     public void HidePlayer(bool _isHiding) {
 
-        if(!currentRoom.isCorridor || !currentRoom.isEntrance) {
+        if(currentRoom.isCorridor || currentRoom.isEntrance) {
             playerStatsHandler.isHiding = false;
         } else {
             playerStatsHandler.isHiding = _isHiding;
@@ -106,6 +111,16 @@ public class PlayerManager : MonoBehaviour {
     public void SpawnEatenEnemyObject() {
         //Spawn the item that flyes when you eat the enemy
         
+    }
+
+    public void ShakeCamera(float amplitude, float frequency, float sustainTime) {
+
+        impulseSource.m_ImpulseDefinition.m_AmplitudeGain = amplitude;
+        impulseSource.m_ImpulseDefinition.m_FrequencyGain = frequency;
+        impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = sustainTime;
+
+        impulseSource.GenerateImpulse();
+
     }
 
     IEnumerator ProcessOpenChest() {

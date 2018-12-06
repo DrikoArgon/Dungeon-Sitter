@@ -8,10 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 548eb0535c0513c43ae282d2df7b98e0, type: 3}
-  m_Name: Dungeon1
+  m_Script: {fileID: 11500000, guid: 2d5751a2c961df945a34295ccf5e576d, type: 3}
+  m_Name: WallMinimapIcon
   m_EditorClassIdentifier: 
-  timeBetweenWaves: 0
-  dungeonWaves:
-  - waveEnemies: 00000000
-    timeBetweenEachEnemy: 3
+  m_Prefabs:
+  - {fileID: 1194358762585056, guid: 215f820b8b564d34881f480c5a353951, type: 2}
+  m_PerlinScale: 0.5
+  m_Z: 0
