@@ -60,6 +60,9 @@ TagManager:
     uniqueID: 3130802303
     locked: 0
   - name: Dark Tiles
+    uniqueID: 241751771
+    locked: 0
+  - name: Minimap
     uniqueID: 984831609
     locked: 0
   - name: UI
