@@ -10,6 +10,10 @@ public class Chest : MonoBehaviour {
     public int treasureAmount;
     public PlayerDirection chestDirection;
 
+    public SpriteRenderer minimapIconSpriteRenderer;
+    public Sprite OpenedIcon;
+    public Sprite ClosedIcon;
+
     private Enemy currentEnemyInteracting;
     private Animator chestAnimator;
     private Dictionary<string, float> animationLengths;
@@ -32,6 +36,13 @@ public class Chest : MonoBehaviour {
         currentEnemyInteracting = _currentEnemyInteracting;
         StartCoroutine(ProcessOpenChest());
         isDisabled = true;
+        minimapIconSpriteRenderer.sprite = OpenedIcon;
+    }
+
+    public void CloseChest() {
+        minimapIconSpriteRenderer.sprite = ClosedIcon;
+        isDisabled = false;
+        chestAnimator.Play("Closed");
     }
 
     void SetAnimationLengths() {

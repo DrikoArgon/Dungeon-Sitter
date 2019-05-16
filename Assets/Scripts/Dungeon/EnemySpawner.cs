@@ -74,7 +74,6 @@ public class EnemySpawner : MonoBehaviour {
             }
         }
 
-
     }
 
     public void StartWaves() {
@@ -83,14 +82,16 @@ public class EnemySpawner : MonoBehaviour {
     }
 
     public void SetNextWave() {
-
+        Debug.Log("Initiating next wave");
         currentEnemyIndex = 0;
+        currentWaveIndex++;
 
         if (currentWaveIndex >= wavesData.dungeonWaves.Count) {
             //Arena has no more Waves
             dungeonWavesEnded = true;
         } else {
             currentWave = wavesData.dungeonWaves[currentWaveIndex];
+            currentTimeBetweenEnemies = 0;
             currentWaveTimeBetweenEnemies = currentWave.timeBetweenEachEnemy;
             isWaitingNextWave = false;
         }
@@ -105,7 +106,9 @@ public class EnemySpawner : MonoBehaviour {
         GameObject newEnemy = (GameObject)Instantiate(Resources.Load("Prefabs/Enemies/" + currentWave.waveEnemies[currentEnemyIndex].ToString()), entrance.entranceEnemySpawnPoint.position, Quaternion.identity);
 
         newEnemy.GetComponentInChildren<EnemyMovementHandler>().DefineTarget(entrance.GetArrivalPoint());
-        newEnemy.GetComponentInChildren<EnemyObservationHandler>().targetRoom = entrance;         
+        newEnemy.GetComponentInChildren<EnemyObservationHandler>().targetRoom = entrance;
+
+        UIManager.instance.ShowEnemyEnterNotification();
 
     }
 

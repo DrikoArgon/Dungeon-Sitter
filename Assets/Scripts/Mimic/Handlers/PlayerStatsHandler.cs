@@ -79,5 +79,6 @@ public enum ChestType {
     Normal,
     Magic,
     Hunter,
-    Warrior
+    Warrior,
+    Holy
 }

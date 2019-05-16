@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Chest
   - Room
+  - Memento
   layers:
   - Default
   - TransparentFX

@@ -11,7 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548eb0535c0513c43ae282d2df7b98e0, type: 3}
   m_Name: Dungeon1
   m_EditorClassIdentifier: 
-  timeBetweenWaves: 0
+  timeBetweenWaves: 60
   dungeonWaves:
   - waveEnemies: 00000000
-    timeBetweenEachEnemy: 3
+    timeBetweenEachEnemy: 5
+  - waveEnemies: 000000000000000000000000
+    timeBetweenEachEnemy: 15

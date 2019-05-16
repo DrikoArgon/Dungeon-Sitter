@@ -31,7 +31,7 @@ public class WarriorCheckingChestState : EnemyState<Warrior> {
 
                 if (!owner.observationHandler.isWaitingForChestToOpen) {
 
-                    owner.statsHandler.IncreaseCurrentTreasure(owner.observationHandler.targetChestInfo.targetChest.GetComponent<Chest>().treasureAmount);
+                    owner.statsHandler.IncreaseCurrentTreasure(owner.observationHandler.targetChestInfo.targetChest.GetComponent<Chest>());
                     RestartSearch(owner);
 
                 }

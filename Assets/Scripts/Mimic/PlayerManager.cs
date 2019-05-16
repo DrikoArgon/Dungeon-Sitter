@@ -109,7 +109,7 @@ public class PlayerManager : MonoBehaviour {
     }
 
     public void SpawnEatenEnemyObject() {
-        //Spawn the item that flyes when you eat the enemy
+        //Spawn memento that flyes when you eat the enemy
         
     }
 
@@ -121,6 +121,14 @@ public class PlayerManager : MonoBehaviour {
 
         impulseSource.GenerateImpulse();
 
+    }
+
+    public void CalculateConvincingLevel(int convincingBonus) {
+        convincingLevel = convincingBonus / 100;
+    }
+
+    public void ResetConvincingLevel() {
+        convincingLevel = 0;
     }
 
     IEnumerator ProcessOpenChest() {

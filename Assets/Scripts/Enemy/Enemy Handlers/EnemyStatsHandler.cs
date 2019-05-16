@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyStatsHandler : MonoBehaviour {
 
+    public List<Chest> openedChests;
+
     public int currentTreasureAmount;
     public int currentHealth;
 
@@ -24,8 +26,9 @@ public class EnemyStatsHandler : MonoBehaviour {
 
 	}
 
-    public void IncreaseCurrentTreasure(int amount) {
-        currentTreasureAmount += amount;
+    public void IncreaseCurrentTreasure(Chest chestOpened) {
+        openedChests.Add(chestOpened);
+        currentTreasureAmount += chestOpened.treasureAmount;
     }
 
     public void ReceiveDamage(int damage) {
@@ -46,6 +49,9 @@ public class EnemyStatsHandler : MonoBehaviour {
 
     public void Execute() {
 
+        foreach(Chest chest in openedChests) {
+            chest.CloseChest();
+        }
         //Show the UI this enemy died
         Destroy(gameObject);
     }
